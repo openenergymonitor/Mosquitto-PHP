@@ -1,16 +1,10 @@
 # Mosquitto-PHP
 
-This is an extension to allow using the [Eclipse Mosquitto™ MQTT client library](http://mosquitto.org) with PHP. See the `examples/` directory for usage.
-
-[![Build Status](https://travis-ci.org/mgdm/Mosquitto-PHP.svg?branch=master)](https://travis-ci.org/mgdm/Mosquitto-PHP)
-
-## PHP 7 support
-
-Thanks to [Sara Golemon](https://twitter.com/SaraMG) this extension now supports PHP 7. I would be grateful if anyone using PHP 7 could test it and let me know how it works out.
+This is an extension to allow using the [Eclipse Mosquitto™ MQTT client library](https://mosquitto.org) with PHP. See the `examples/` directory for usage. This is a fork of the project [Mosquitto-PHP](https://github.com/mgdm/Mosquitto-PHP) by Michael Maclean.
 
 ## Requirements
 
-* PHP 5.3+
+* PHP 8.0+
 * libmosquitto 1.2.x or later
 * Linux or Mac OS X. I do not have a Windows machine handy, though patches or
   pull requests are of course very welcome!
@@ -18,14 +12,6 @@ Thanks to [Sara Golemon](https://twitter.com/SaraMG) this extension now supports
 ## Installation
 
 If you've used a pre-built package to install Mosquitto, you need to make sure you have the development headers installed. On Red Hat-derived systems, this is probably called `libmosquitto-devel`, and on Debian-based systems it will be `libmosquitto-dev`.
-
-You may obtain this package using [PECL](http://pecl.php.net):
-
-````
-pecl install Mosquitto-alpha
-````
-
-Alternatively, you can use the normal extension build process:
 
 ````
 phpize
