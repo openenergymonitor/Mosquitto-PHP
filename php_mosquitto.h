@@ -1,7 +1,7 @@
 #ifndef PHP_MOSQUITTO_H
 #define PHP_MOSQUITTO_H
 
-#define PHP_MOSQUITTO_VERSION "0.5.1"
+#define PHP_MOSQUITTO_VERSION "0.5.2"
 
 extern zend_module_entry mosquitto_module_entry;
 #define phpext_mosquitto_ptr &mosquitto_module_entry
@@ -69,7 +69,7 @@ typedef struct _mosquitto_message_object {
 static inline
 mosquitto_client_object *mosquitto_client_object_from_zend_object(zend_object* obj) {
 	return (mosquitto_client_object*)(
-		((char*)obj) - XtOffsetOf(mosquitto_client_object, std)
+		((char*)obj) - offsetof(mosquitto_client_object, std)
 	);
 }
 
@@ -81,7 +81,7 @@ zend_object *mosquitto_client_object_to_zend_object(mosquitto_client_object* cli
 static inline
 mosquitto_message_object *mosquitto_message_object_from_zend_object(zend_object* obj) {
 	return (mosquitto_message_object*)(
-		((char*)obj) - XtOffsetOf(mosquitto_message_object, std)
+		((char*)obj) - offsetof(mosquitto_message_object, std)
 	);
 }
 
@@ -153,7 +153,7 @@ static int php_mosquitto_message_write_##name(mosquitto_message_object *mosquitt
 	mosquitto_object->message.name = Z_LVAL_P(newval); \
 \
 	if (newval == &ztmp) { \
-		zval_dtor(newval); \
+		zval_ptr_dtor_nogc(newval); \
 	} \
 	return SUCCESS; \
 }

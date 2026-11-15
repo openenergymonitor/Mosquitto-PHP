@@ -149,7 +149,7 @@ static int php_mosquitto_message_write_topic(mosquitto_message_object *mosquitto
 	mosquitto_object->owned_topic = 1;
 
 	if (newval == &ztmp) {
-		zval_dtor(newval);
+		zval_ptr_dtor_nogc(newval);
 	}
 
 	return SUCCESS;
@@ -175,7 +175,7 @@ static int php_mosquitto_message_write_payload(mosquitto_message_object *mosquit
 	mosquitto_object->owned_payload = 1;
 
 	if (newval == &ztmp) {
-		zval_dtor(newval);
+		zval_ptr_dtor_nogc(newval);
 	}
 
 	return SUCCESS;
@@ -362,7 +362,7 @@ PHP_MINIT_FUNCTION(mosquitto_message)
 	mosquitto_message_object_handlers.write_property = php_mosquitto_message_write_property;
 	mosquitto_message_object_handlers.has_property = php_mosquitto_message_has_property;
 	mosquitto_message_object_handlers.get_properties = php_mosquitto_message_get_properties;
-	mosquitto_message_object_handlers.offset    = XtOffsetOf(mosquitto_message_object, std);
+	mosquitto_message_object_handlers.offset    = offsetof(mosquitto_message_object, std);
 	mosquitto_message_object_handlers.free_obj  = mosquitto_message_object_destroy;
 
 	INIT_NS_CLASS_ENTRY(message_ce, "Mosquitto", "Message", mosquitto_message_methods);
@@ -373,4 +373,4 @@ PHP_MINIT_FUNCTION(mosquitto_message)
 	PHP_MOSQUITTO_ADD_PROPERTIES(&php_mosquitto_message_properties, php_mosquitto_message_property_entries);
 
 	return SUCCESS;
-}	
+}
