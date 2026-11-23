@@ -1241,7 +1241,7 @@ PHP_MINIT_FUNCTION(mosquitto)
 
 	memcpy(&mosquitto_std_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
 	mosquitto_std_object_handlers.clone_obj = NULL;
-	mosquitto_std_object_handlers.offset    = XtOffsetOf(mosquitto_client_object, std);
+	mosquitto_std_object_handlers.offset    = offsetof(mosquitto_client_object, std);
 	mosquitto_std_object_handlers.free_obj  = mosquitto_client_object_free;
 	mosquitto_std_object_handlers.dtor_obj  = mosquitto_client_object_destroy;
 
